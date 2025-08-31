@@ -37,8 +37,21 @@ export const generateRandomUser = () => {
   };
 };
 
-// Форматирование телефона (если нужно)
-// export const formatPhone = (phone: string) => {
-//   const digits = phone.replace(/\D/g, '');
-//   return `+${digits[0]} (${digits.substring(1, 4)}) ${digits.substring(4, 7)}-${digits.substring(7, 9)}-${digits.substring(9)}`;
-// };
+// test-data.ts
+export const generateRandomAd = () => {
+  const categories = ['Одежда', 'Техника', 'Спорт', 'Услуги'];
+  const materials = ['Хлопок', 'Шерсть', 'Синтетика', 'Кожа'];
+  const colors = ['Красные', 'Синие', 'Черные', 'Белые', 'Зеленые'];
+  const types = ['Шорты', 'Брюки', 'Футболка', 'Куртка', 'Платье'];
+  
+  const randomType = types[Math.floor(Math.random() * types.length)];
+  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  const randomMaterial = materials[Math.floor(Math.random() * materials.length)];
+
+  return {
+    title: `${randomColor} ${randomType} из ${randomMaterial}`,
+    category: categories[Math.floor(Math.random() * categories.length)],
+    description: `Стильные ${randomColor.toLowerCase()} ${randomType.toLowerCase()} из ${randomMaterial.toLowerCase()}. ${['Идеально для лета.', 'Подойдет для офиса.', 'Удобная модель.'][Math.floor(Math.random() * 3)]}`,
+    price: (Math.floor(Math.random() * 900) + 100) // Случайная цена от 100 до 1000
+  };
+};

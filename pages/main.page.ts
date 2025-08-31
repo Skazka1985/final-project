@@ -4,9 +4,9 @@ export class MainPage {
     readonly page: Page;
     readonly loginButton: Locator;
 
-    constructor(page: Page) {
+    constructor(page: Page, locators: any) {
         this.page = page;
-        this.loginButton = page.getByRole('banner').getByRole('button', { name: 'Войти' }).first();
+        this.loginButton = page.locator(locators.loginButton);
     }
 
     async navigate() {

@@ -11,16 +11,17 @@ export class AuthPage {
   readonly emailInvalid: Locator;
   readonly passwordError: Locator;
 
-  constructor(page: Page) {
-      this.page = page;
-      this.title = page.getByText('Вход');
-      this.registerLink = page.getByText('Еще не зарегистрированы ?');
-      this.emailInput = page.getByRole('textbox', { name: 'Почта' });
-      this.passwordInput = page.getByRole('textbox', { name: 'Пароль' });
-      this.submitButton = page.locator('div').filter({ hasText: /^ВходПочтаПочтаПарольПарольВойти Еще не зарегистрированы \?$/ }).getByRole('button');
-      this.emailError = page.locator('div').filter({ hasText: /^ПочтаПочтаЗаполните поле$/ }).getByRole('paragraph');
-      this.emailInvalid = page.getByText('Неверный формат почты');
-      this.passwordError = page.locator('div').filter({ hasText: /^ПарольПарольЗаполните поле$/ }).getByRole('paragraph');
+  constructor(page: Page, locators: any) { // 🔹 Принимаем локаторы из фикстур
+    this.page = page;
+    this.title = page.locator(locators.title);
+    this.registerLink = page.locator(locators.registerLink);
+    this.emailInput = page.getByRole(locators.emailInput.role, { name: locators.emailInput.name });
+    this.passwordInput = page.getByRole(locators.passwordInput.role, { name: locators.passwordInput.name });
+    this.submitButton = page.getByRole(locators.submitButton.role, { name: locators.submitButton.name }).nth(locators.submitButton.nth);
+    this.emailError = page.locator(locators.emailError.selector).nth(locators.emailError.nth);
+    this.passwordError = page.locator(locators.passwordError.selector).nth(locators.passwordError.nth);
+    this.emailInvalid = page.locator(locators.emailInvalid);
+    
   }
 
   async navigateToRegistration() {

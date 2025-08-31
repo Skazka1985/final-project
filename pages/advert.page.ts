@@ -24,16 +24,6 @@ export class AdPage {
     return parseInt(countText?.match(/\((\d+)\)/)?.[1] || '0');
   }
 
-//   async selectCategory(categoryName: string) {
-//     // Вариант 1: Используем порядок категорий (самый надежный в вашем случае)
-//     const categoryOrder = ['Одежда', 'Техника', 'Спорт', 'Услуги'];
-//     const index = categoryOrder.indexOf(categoryName);
-//     await this.page.getByText(categoryName).nth(index).click();
-
-//     // Вариант 2: Точный текст (если порядок может меняться)
-//     // await this.page.getByRole('button', { name: categoryName, exact: true }).first().click();
-//   }
-
     async selectCategory(categoryName: string) {
     // Ждем появления контейнера с категориями
     await this.page.locator('.Categories_item__RBV65').first().waitFor();
